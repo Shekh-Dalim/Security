@@ -1,5 +1,8 @@
 package com.springsecuritypractice.practice.controller;
 
+import com.springsecuritypractice.practice.dto.UserRegisterRequestDto;
+import com.springsecuritypractice.practice.dto.UserRegisterResponseDto;
+import com.springsecuritypractice.practice.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
@@ -8,30 +11,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserController {
 
+    private AuthService authService;
+
+    public UserController(AuthService authService) {
+        this.authService = authService;
+    }
+
+
     @GetMapping("/hello")
     public String getStudent() {
         return "Hello";
     }
 
-//    @PostMapping
-//    public ResponseEntity<String> createStudent() {
-//        return ResponseEntity.ok("Student created Successfully");
-//    }
-//
-//    @DeleteMapping
-//    public ResponseEntity<String> deleteStudent() {
-//        return ResponseEntity.ok("Student delete Successfully");
-//    }
-//
-//    @PutMapping
-//    public ResponseEntity<String> updateStudent() {
-//        return ResponseEntity.ok("Student update Successfully");
-//    }
-//
-//    // This code only used to run the post delete and put.
-//    @GetMapping("/csrf")
-//    public CsrfToken getToken(CsrfToken csrfToken) {
-//        return csrfToken;
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<UserRegisterResponseDto> register(@RequestBody UserRegisterRequestDto registerRequestDto) {
+
+        UserRegisterResponseDto userRegisterResponseDto = authService.register(registerRequestDto);
+        return ResponseEntity.ok(userRegisterResponseDto);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> login(@RequestBody UserRegisterRequestDto registerRequestDto) {
+
+        Boolean loggedin = authService.login(registerRequestDto);
+        return ResponseEntity.ok(loggedin);
+    }
+
+    @GetMapping("/token")
+    public CsrfToken getToken(CsrfToken csrfToken){
+        return csrfToken;
+    }
 
 }
