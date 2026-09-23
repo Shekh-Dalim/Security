@@ -11,11 +11,11 @@ import java.util.List;
 public class CustomUserDetails implements UserDetails {
 
     private User user;
-
     public CustomUserDetails(User user) {
         this.user = user;
     }
 
+    //TODO this method return role User → Roles → GrantedAuthority → Spring Security.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles()
@@ -30,16 +30,16 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return user.getPassWord();
+        return user.getPassWord();  // TODO: This method returns the user's password
     }
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return user.getUserName();  // TODO: This method returns the user's username
     }
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return user.isEnabled();  // TODO: This method returns whether the user is enabled
     }
 }

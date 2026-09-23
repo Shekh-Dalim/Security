@@ -13,6 +13,6 @@ public class RoleService {
     }
 
     public void addRole(Role role){
-        roleRepository.save(role);
+        roleRepository.save(role);  // TODO persist object to DB
     }
 }

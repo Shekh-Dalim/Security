@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/roles")
 public class RoleController {
 
-    private RoleService roleSservice;
+    private RoleService roleService;
     public RoleController(RoleService roleService){
-        this.roleSservice = roleService;
+        this.roleService = roleService;
     }
 
     @PostMapping
     public ResponseEntity<String> addRole(@RequestBody Role role){
-        roleSservice.addRole(role);
+        roleService.addRole(role);  // TODO Send/pass the role object from the Controller to the Service.
         return ResponseEntity.ok("Done");
     }
 

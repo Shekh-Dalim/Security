@@ -8,7 +8,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
     private AuthService authService;
@@ -30,9 +30,9 @@ public class UserController {
         return ResponseEntity.ok(userRegisterResponseDto);
     }
 
-    @GetMapping("/token")
-    public CsrfToken getToken(CsrfToken csrfToken) {
-        return csrfToken;
-    }
+//    @GetMapping("/token")
+//    public CsrfToken getToken(CsrfToken csrfToken) {
+//        return csrfToken;
+//    }
 
 }

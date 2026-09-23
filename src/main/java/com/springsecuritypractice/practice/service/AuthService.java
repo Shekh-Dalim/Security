@@ -17,12 +17,13 @@ import java.util.Optional;
 public class AuthService {
 
     private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository, RoleRepository roleRepository) {
+    public AuthService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
 
     }
 
@@ -34,7 +35,6 @@ public class AuthService {
         user.setPassWord(encodedPassword);
         user.setEnabled(true);
 
-//        Role role = roleRepository.findByName("ROLE_USER").orElseThrow(() -> new RuntimeException("ROLE_USER not found"));
         Role role = roleRepository.findByName("ROLE_USER").get();
         user.getRoles().add(role);  // TODO user.getRoles() "Give me the user's existing roles box." and add(role) the role
         userRepository.save(user);
