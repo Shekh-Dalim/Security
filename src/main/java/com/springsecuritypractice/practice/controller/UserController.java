@@ -4,6 +4,7 @@ import com.springsecuritypractice.practice.dto.UserRegisterRequestDto;
 import com.springsecuritypractice.practice.dto.UserRegisterResponseDto;
 import com.springsecuritypractice.practice.service.AuthService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,10 @@ public class UserController {
 
 
     @GetMapping("/hello")
-    public String getStudent() {
-        return "Hello";
+    public String getStudent(Authentication authentication) {
+        return "Hello, You are logged in as: " + authentication.getName();
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<UserRegisterResponseDto> register(@RequestBody UserRegisterRequestDto registerRequestDto) {

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @EntityGraph(attributePaths =  "roles")
+    @EntityGraph(attributePaths =  "roles")  // TODO The main use of @EntityGraph(attributePaths = "roles") is to load the User and its roles together from the database.
     Optional<User> findByUserName(String userName);
 }

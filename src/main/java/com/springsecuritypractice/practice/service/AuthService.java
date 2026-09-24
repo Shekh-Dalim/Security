@@ -29,15 +29,15 @@ public class AuthService {
 
     public UserRegisterResponseDto register(UserRegisterRequestDto registerRequestDto) {
 
-        User user = new User();
-        user.setUserName(registerRequestDto.getUsername());
-        String encodedPassword = passwordEncoder.encode(registerRequestDto.getPassword());
-        user.setPassWord(encodedPassword);
+        User user = new User();  // TODO Create an User obj
+        user.setUserName(registerRequestDto.getUsername());  // TODO set username
+        String encodedPassword = passwordEncoder.encode(registerRequestDto.getPassword());  // TODO encode the password
+        user.setPassWord(encodedPassword); // TODO set the password
         user.setEnabled(true);
 
-        Role role = roleRepository.findByName("ROLE_USER").get();
-        user.getRoles().add(role);  // TODO user.getRoles() "Give me the user's existing roles box." and add(role) the role
-        userRepository.save(user);
+        Role role = roleRepository.findByName("ROLE_USER").get();  // TODO Set the role
+        user.getRoles().add(role);  // TODO Add the given role to the user's roles collection.        user.getRoles() "Give me the user's existing roles box." and add(role) the role
+        userRepository.save(user); // TODO save the user to the DB
 
         UserRegisterResponseDto responseDto = new UserRegisterResponseDto();
         responseDto.setUsername(user.getUserName());
